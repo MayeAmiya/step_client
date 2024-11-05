@@ -2,10 +2,8 @@
   <div class="desktop-container">
     <MapContainer />
     <div class="overlay">
-      <!-- 在这里添加你想显示的元素 -->
       <div class="overlay-content">
-        <p>Overlay Content</p>
-        <button @click="handleOverlayClick">Click Me</button>
+        <group />
       </div>
     </div>
   </div>
@@ -13,10 +11,7 @@
 
 <script lang="ts" setup>
 import MapContainer from './desktop/MapContainer.vue'
-
-const handleOverlayClick = () => {
-  console.log('Overlay button clicked')
-}
+import group from './desktop/group.vue'
 </script>
 
 <style scoped>

@@ -1,15 +1,17 @@
-import { app, shell, BrowserWindow, ipcMain } from 'electron'
+import { app, shell, BrowserWindow, ipcMain, screen } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 
 function createWindow(): void {
   // 创建浏览器窗口
+  const { width, height } = screen.getPrimaryDisplay().workAreaSize
   const mainWindow = new BrowserWindow({
-    width: 900,
-    height: 670,
+    width: Math.min(900, width),
+    height: Math.min(670, height),
     show: false,
     autoHideMenuBar: true,
+    //frame: false,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
