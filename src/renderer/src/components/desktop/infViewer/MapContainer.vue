@@ -1,3 +1,7 @@
+<template>
+  <div id="container"></div>
+</template>
+
 <script setup>
 import { onMounted, onUnmounted } from 'vue'
 import AMapLoader from '@amap/amap-jsapi-loader'
@@ -29,12 +33,8 @@ onMounted(() => {
         zoom: 11, // 初始化地图级别
         center: [113.53771, 34.80006] // 初始化地图中心点位置
       })
-      const scale = new AMap.Scale()
-      map.addControl(scale)
       const geolocation = new AMap.Geolocation()
       map.addControl(geolocation)
-      const controlBar = new AMap.ControlBar()
-      map.addControl(controlBar)
 
       map.on('click', handleMapClick)
     })
@@ -47,10 +47,6 @@ onUnmounted(() => {
   map?.destroy()
 })
 </script>
-
-<template>
-  <div id="container"></div>
-</template>
 
 <style scoped>
 #container {

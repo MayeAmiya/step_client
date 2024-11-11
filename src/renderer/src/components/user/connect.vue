@@ -62,6 +62,7 @@ const login = () => {
 }
 
 button {
+  position: relative;
   padding: 10px 80px;
   font-size: 16px;
   cursor: pointer;

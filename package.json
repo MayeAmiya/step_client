@@ -24,7 +24,9 @@
     "@amap/amap-jsapi-loader": "^1.0.1",
     "@electron-toolkit/preload": "^3.0.0",
     "@electron-toolkit/utils": "^3.0.0",
-    "electron-updater": "^6.1.7"
+    "axios": "^1.7.7",
+    "electron-updater": "^6.1.7",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@electron-toolkit/eslint-config": "^1.0.2",

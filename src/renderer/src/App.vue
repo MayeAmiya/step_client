@@ -25,9 +25,6 @@ onMounted(() => {
 
 <style>
 #app {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  position: relative;
 }
 </style>

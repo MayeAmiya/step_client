@@ -3,4 +3,7 @@ dist
 out
 .DS_Store
 *.log*
-step_A
+step_Android
+build
+model
+resources
