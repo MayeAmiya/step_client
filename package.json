@@ -24,8 +24,15 @@
     "@amap/amap-jsapi-loader": "^1.0.1",
     "@electron-toolkit/preload": "^3.0.0",
     "@electron-toolkit/utils": "^3.0.0",
+    "@vueuse/components": "^11.2.0",
+    "@vueuse/core": "^11.2.0",
     "axios": "^1.7.7",
     "electron-updater": "^6.1.7",
+    "element-plus": "^2.8.7",
+    "mockjs": "^1.1.0",
+    "path": "^0.12.7",
+    "pinia": "^2.2.6",
+    "vue-router": "^4.4.5",
     "vuex": "^4.0.2"
   },
   "devDependencies": {

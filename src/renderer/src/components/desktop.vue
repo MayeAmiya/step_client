@@ -2,21 +2,10 @@
   <div class="desktop-container">
     <infViewer default="Map" class="map" />
     <div class="overlay">
-      <div class="overlay-content-setting">
-        <Setting />
-      </div>
-
-      <div class="overlay-content-person">
-        <Person />
-      </div>
-
-      <div class="overlay-content-bbs">
-        <BBS />
-      </div>
-
-      <div class="overlay-content-search">
-        <Search />
-      </div>
+      <div class="overlay-content"><Setting /></div>
+      <div class="overlay-content"><Person /></div>
+      <!-- <div class="overlay-content"><Setting /></div>
+      <div class="overlay-content"><Setting /></div> -->
     </div>
   </div>
 </template>
@@ -25,8 +14,8 @@
 import infViewer from './desktop/infViewer.vue'
 import Setting from './desktop/setting.vue'
 import Person from './desktop/person.vue'
-import BBS from './desktop/bbs.vue'
-import Search from './desktop/search.vue'
+// import BBS from './desktop/bbs.vue'
+// import Search from './desktop/search.vue'
 </script>
 
 <style scoped>
@@ -37,7 +26,7 @@ import Search from './desktop/search.vue'
 }
 
 .map {
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   width: 100%;
@@ -45,41 +34,18 @@ import Search from './desktop/search.vue'
 }
 
 .overlay {
-  position: relative;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  pointer-events: none; /* 确保 overlay 不能够接收事件 */
+  pointer-events: none;
 }
 
-.overlay-content-setting {
-  pointer-events: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.overlay-content {
   position: absolute;
-}
-.overlay-content-person {
+  width: 100vw;
+  height: 100vh;
   pointer-events: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: absolute;
-}
-.overlay-content-bbs {
-  pointer-events: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: absolute;
-}
-
-.overlay-content-setting {
-  pointer-events: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: absolute;
 }
 </style>

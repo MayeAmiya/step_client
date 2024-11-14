@@ -1,126 +1,48 @@
 <template>
-  <div ref="loginContainerRef" class="login-container" @click.stop>
-    <div v-if="loginVisible">
-      <div class="login-toggle">
-        <el-button type="primary" class="toggle-button" @click="isIndividual = true"
-          >个人</el-button
-        >
-        <el-button type="primary" class="toggle-button" @click="isIndividual = false"
-          >机构</el-button
-        >
-      </div>
-
-      <div v-if="isIndividual" class="login-form">
-        <h2>个人登录</h2>
-        <input
-          id="individual-username"
-          v-model="individualUsername"
-          type="text"
-          placeholder="用户名"
-          required
-        />
-        <input
-          id="individual-password"
-          v-model="individualPassword"
-          type="password"
-          placeholder="密码"
-          required
-        />
-        <el-button type="primary" class="large-button" @click="handleIndividualLogin"
-          >Login</el-button
-        >
-      </div>
-
-      <div v-else class="login-form">
-        <h2>机构登录</h2>
-        <input
-          id="organization-Organizationname"
-          v-model="organizationOrganizationname"
-          type="text"
-          placeholder="组织名称"
-          required
-        />
-        <input
-          id="organization-username"
-          v-model="organizationUsername"
-          type="text"
-          placeholder="用户名"
-          required
-        />
-        <input
-          id="organization-password"
-          v-model="organizationPassword"
-          type="password"
-          placeholder="密码"
-          required
-        />
-        <el-button type="primary" class="large-button" @click="handleOrganizationLogin"
-          >Login</el-button
-        >
-      </div>
-    </div>
-
-    <component :is="LoginComponent" />
+  <div ref="loginContainerRef" v-on-click-outside="back" class="login-container">
+    <h1>Login</h1>
+    <el-input
+      id="organization-username"
+      v-model="Username"
+      type="text"
+      placeholder="用户名"
+      required
+    />
+    <el-input
+      id="organization-password"
+      v-model="Password"
+      type="password"
+      placeholder="密码"
+      required
+    />
+    <el-button type="primary" class="large-button" @click="Login">Login</el-button>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, onUnmounted } from 'vue'
-import Connect from './connect.vue'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { vOnClickOutside } from '@vueuse/components'
 
-const loginContainerRef = ref<HTMLElement | null>(null)
-const LoginComponent = ref<typeof Connect | null>(null)
+const Username = ref('')
+const Password = ref('')
 
-const isIndividual = ref(true)
-const individualUsername = ref('')
-const individualPassword = ref('')
+const visible = ref(true)
+const router = useRouter()
 
-const organizationOrganizationname = ref('')
-const organizationUsername = ref('')
-const organizationPassword = ref('')
-
-const loginVisible = ref(true)
-
-const handleIndividualLogin = () => {
-  // Handle individual login logic here
-  console.log('Individual login:', individualUsername.value, individualPassword.value)
-  loginVisible.value = false
-  LoginComponent.value = Connect
+const Login = () => {
+  console.log('Username:', Username.value)
+  console.log('Password', Password.value)
+  // Add your login logic here
+  console.log('Login button clicked')
+  visible.value = false
+  router.push({ name: 'Connect' })
 }
-
-const handleOrganizationLogin = () => {
-  // Handle organization login logic here
-  console.log(
-    'Organization login:',
-    organizationOrganizationname.value,
-    organizationUsername.value,
-    organizationPassword.value
-  )
-  loginVisible.value = false
-  LoginComponent.value = Connect
+const back = () => {
+  console.log('Login back clicked')
+  router.push({ name: 'Home' })
+  console.log('Current route:', router.currentRoute.value)
 }
-
-const handleClickOutside = (event: MouseEvent) => {
-  if (loginContainerRef.value && !loginContainerRef.value.contains(event.target as Node)) {
-    console.log('Clicked outside the container')
-    // 在这里处理点击容器外部的逻辑
-    if (loginVisible.value == false) {
-      console.log('close')
-      loginVisible.value = true
-      LoginComponent.value = null
-      document.removeEventListener('click', handleClickOutside)
-    }
-  }
-}
-
-onMounted(() => {
-  console.log('start')
-  document.addEventListener('click', handleClickOutside)
-})
-
-onUnmounted(() => {
-  document.removeEventListener('click', handleClickOutside)
-})
 </script>
 
 <style scoped>
@@ -129,14 +51,7 @@ onUnmounted(() => {
   flex-direction: column;
   align-items: center;
   padding: 20px;
-}
-
-.login-toggle {
-  display: flex;
-  justify-content: space-around; /* 确保按钮之间有适当的间距 */
-  width: 250px; /* 设置最大宽度 */
-  height: 20px;
-  margin-bottom: 20px;
+  z-index: 1;
 }
 
 .login-form {
@@ -145,13 +60,11 @@ onUnmounted(() => {
   align-items: center; /* 使表单元素居中 */
   width: 100%;
   max-width: 400px;
-}
-
-.login-form > * {
   margin-bottom: 10px;
 }
 
 .large-button {
+  position: relative;
   width: 150px;
   height: 50px;
   font-size: 16px;
