@@ -1,68 +1,44 @@
 <template>
   <div style="pointer-events: auto">
-    <div style="position: absolute; top: 16px; right: 16px">
-      <el-avatar shape="square" fit="fit" src="../../assets/head.png" @click="drawer = true" />
-    </div>
-    <el-drawer v-model="drawer" :with-header="false" direction="rtl" :size="'auto'">
-      <div style="display: flex; flex-direction: column; align-items: center">
-        <el-avatar size="auto" src="../../assets/head.png" @click="isCollapse = !isCollapse" />
-        <el-menu
-          default-active="2"
-          class="el-menu-vertical-demo"
-          :collapse="isCollapse"
-          @open="handleOpen"
-          @close="handleClose"
-        >
-          <el-sub-menu index="1">
-            <template #title>
-              <el-icon><location /></el-icon>
-              <span>Navigator One</span>
-            </template>
-            <el-menu-item-group>
-              <template #title><span>Group One</span></template>
-              <el-menu-item index="1-1">item one</el-menu-item>
-              <el-menu-item index="1-2">item two</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group title="Group Two">
-              <el-menu-item index="1-3">item three</el-menu-item>
-            </el-menu-item-group>
-            <el-sub-menu index="1-4">
-              <template #title><span>item four</span></template>
-              <el-menu-item index="1-4-1">item one</el-menu-item>
-            </el-sub-menu>
-          </el-sub-menu>
+    <div style="display: flex; flex-direction: column; align-items: center">
+      <el-avatar size="auto" src="../../assets/head.png" @click="isCollapse = !isCollapse" />
+      <el-menu
+        default-active="2"
+        class="el-menu-vertical-demo"
+        :collapse="isCollapse"
+        @open="handleOpen"
+        @close="handleClose"
+      >
+        <el-sub-menu index="1">
+          <template #title>
+            <el-icon><location /></el-icon>
+            <span>Personal</span>
+          </template>
+          <el-menu-item-group>
+            <el-menu-item index="1-1">Information</el-menu-item>
+            <el-menu-item index="1-2">Safe</el-menu-item>
+          </el-menu-item-group>
+        </el-sub-menu>
 
-          <el-menu-item index="2">
-            <el-icon><icon-menu /></el-icon>
-            <template #title>Navigator Two</template>
-          </el-menu-item>
-          <el-menu-item index="3" disabled>
-            <el-icon><document /></el-icon>
-            <template #title>Navigator Three</template>
-          </el-menu-item>
-          <el-menu-item index="4">
-            <el-icon><setting /></el-icon>
-            <template #title>Navigator Four</template>
-          </el-menu-item>
-        </el-menu>
-      </div>
-    </el-drawer>
+        <el-menu-item index="2">
+          <el-icon><icon-menu /></el-icon>
+          <template #title>ToDo</template>
+        </el-menu-item>
+        <el-menu-item index="3" disabled>
+          <el-icon><document /></el-icon>
+          <template #title>Groups</template>
+        </el-menu-item>
+        <el-menu-item index="4">
+          <el-icon><setting /></el-icon>
+          <template #title>Setting</template>
+        </el-menu-item>
+      </el-menu>
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-
-import { useGlobalStore } from '../../eventBus'
-
-const drawer = ref(false)
-
-const globalStore = useGlobalStore()
-const playgroundCheck = ref(globalStore.Global.playgroundMod)
-
-globalStore.$subscribe(() => {
-  playgroundCheck.value = globalStore.Global.playgroundMod
-})
 
 import { Document, Menu as IconMenu, Location, Setting } from '@element-plus/icons-vue'
 

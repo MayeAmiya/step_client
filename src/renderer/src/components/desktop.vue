@@ -1,21 +1,105 @@
 <template>
   <div class="desktop-container">
-    <infViewer default="Map" class="map" />
+    <mapViewer default="Map" class="map" />
     <div class="overlay">
-      <div class="overlay-content"><Setting /></div>
-      <div class="overlay-content"><Person /></div>
-      <!-- <div class="overlay-content"><Setting /></div>
-      <div class="overlay-content"><Setting /></div> -->
+      <div class="overlay-content">
+        <div style="pointer-events: auto">
+          <div
+            style="
+              position: absolute;
+              bottom: 16px;
+              left: 50%;
+              transform: translateX(-50%);
+              border: 1px solid #dcdfe6;
+              border-radius: 4px;
+              background-color: #fff;
+              padding: 10px;
+              display: flex;
+              gap: 10px;
+            "
+          >
+            <div>
+              <el-button
+                type="primary"
+                style="height: 40px; width: 40px"
+                @click="infPaneDrawer = true"
+              >
+                <el-icon><Search /></el-icon>
+              </el-button>
+            </div>
+
+            <div>
+              <el-button
+                type="primary"
+                style="background-color: rgba(255, 255, 255, 0.5); height: 40px; width: 40px; color: black"
+                @click="infDrawer = true"
+              >
+                <el-icon><ChatSquare /></el-icon>
+              </el-button>
+            </div>
+
+            <div>
+              <el-avatar
+                shape="square"
+                fit="fit"
+                src="../../assets/head.png"
+                @click="personDrawer = true"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="overlay-drawer" style="pointer-events: auto">
+        <el-drawer
+          v-model="infPaneDrawer"
+          :with-header="false"
+          direction="ltr"
+          :size="'60%'"
+          :style="{ minWidth: '650px', maxWidth: '850px' }"
+        >
+          <infPane />
+        </el-drawer>
+
+        <el-drawer v-model="personDrawer" :with-header="false" direction="rtl" :size="'auto'"
+          ><Person />
+        </el-drawer>
+
+        <el-drawer
+          ref="viewer"
+          v-model="infDrawer"
+          :with-header="false"
+          :direction="'btt'"
+          :size="infDrawerSize"
+        >
+          <el-button type="primary" @click="expandDrawer"> Expand Drawer </el-button>
+          <el-button type="primary" @click="closeDrawer"> Close Drawer </el-button>
+          <!-- 这里放组件信息 -->
+          <infViewer />
+        </el-drawer>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import infViewer from './desktop/infViewer.vue'
-import Setting from './desktop/setting.vue'
+import mapViewer from './desktop/mapViewer.vue'
+import infPane from './desktop/infPane.vue'
 import Person from './desktop/person.vue'
-// import BBS from './desktop/bbs.vue'
-// import Search from './desktop/search.vue'
+import infViewer from './desktop/infViewer.vue'
+
+import { ref } from 'vue'
+const personDrawer = ref(false)
+const infDrawer = ref(false)
+const infPaneDrawer = ref(false)
+const infDrawerSize = ref('60%')
+const expandDrawer = () => {
+  infDrawerSize.value = '100%'
+}
+const closeDrawer = () => {
+  infDrawer.value = false
+  infDrawerSize.value = '60%'
+}
 </script>
 
 <style scoped>

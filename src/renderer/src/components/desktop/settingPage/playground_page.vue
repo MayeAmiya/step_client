@@ -20,21 +20,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 import type { ComponentSize } from 'element-plus'
 
 const size = ref<ComponentSize>('default')
-
-const blockMargin = computed(() => {
-  const marginMap = {
-    large: '32px',
-    default: '28px',
-    small: '24px'
-  }
-  return {
-    marginTop: marginMap[size.value] || marginMap.default
-  }
-})
 </script>
 
 <style scoped>

@@ -3,11 +3,9 @@ import { TagInfoCollection } from './components/information/taginfo'
 import { TagDataCollection } from './components/information/dataType'
 
 import { Keyword } from './components/information/keyword'
-import { ref } from 'vue'
 
 export const useGlobalStore = defineStore('counter', {
   state: () => {
-    const playgroundMod = ref(false)
     const tagInfoList = new TagInfoCollection()
     tagInfoList.init()
     const tagDataList = new TagDataCollection()
@@ -15,7 +13,6 @@ export const useGlobalStore = defineStore('counter', {
     const keywordList = new Keyword()
 
     const Global = {
-      playgroundMod,
       tagDataList,
       tagInfoList,
       keywordList
