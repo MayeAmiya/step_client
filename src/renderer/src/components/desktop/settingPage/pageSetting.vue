@@ -14,7 +14,7 @@ import { ref } from 'vue'
 import type { TabsPaneContext } from 'element-plus'
 
 import KeywordCheck from './keyword_page.vue'
-import GroupInf from '../personalPage/groupInfPage.vue'
+import GroupInf from '../../card/groupInfPage.vue'
 const activeName = ref('first')
 
 const handleClick = (tab: TabsPaneContext, event: Event) => {

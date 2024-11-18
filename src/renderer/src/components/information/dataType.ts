@@ -46,4 +46,4 @@ class TagDataCollection {
   }
 }
 
-export { TagDataCollection }
+export { TagDataCollection, type TagData }

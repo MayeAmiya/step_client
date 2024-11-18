@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
 import AMapLoader from '@amap/amap-jsapi-loader'
 
 // 示例数据
@@ -15,6 +15,9 @@ import { useGlobalStore } from '../../../eventBus'
 const globalStore = useGlobalStore()
 const tagInfoList = ref(globalStore.Global.tagInfoList)
 const selectedKeywords = ref(globalStore.Global.keywordList.selected)
+const selectedTagIndex = ref(globalStore.Global.selectedTagIndex)
+
+const openPane = ref(globalStore.Global.functions.get('showDrawer'))
 
 globalStore.$subscribe(() => {
   tagInfoList.value = globalStore.Global.tagInfoList
@@ -30,6 +33,15 @@ globalStore.$subscribe(() => {
   }
 })
 
+watch(selectedTagIndex, (newTag) => {
+  if (newTag && map) {
+    const tag = tagInfoList.value.tags.find((t) => t.id === newTag)
+    if (tag) {
+      globalStore.Global.selectedTagIndex = tag
+    }
+  }
+})
+
 const addMarkers = (AMap) => {
   // 启动容器时根据容器内标签列表初始化关键词列表
   globalStore.setCandidatesFromTagInfo()
@@ -41,20 +53,21 @@ const addMarkers = (AMap) => {
     ) {
       const marker = new AMap.Marker({
         position: tag.location,
-        title: tag.name
+        title: tag.name,
+        id: tag.id
       })
       marker.setMap(map)
       marker.on('click', () => {
-        const infoWindow = new AMap.InfoWindow({
-          content: `<div style="color: black;">
-              <h3>${tag.name}</h3>
-              <p>类型: ${tag.type}</p>
-              <p>信息: ${tag.info.join(', ')}</p>
-              <p>日期: ${tag.date}</p>
-            </div>`,
-          offset: new AMap.Pixel(0, -30)
-        })
-        infoWindow.open(map, marker.getPosition())
+        globalStore.Global.selectedTagIndex = tag.id
+        console.log(globalStore.Global.selectedTagIndex)
+        if (typeof openPane.value === 'function') {
+          openPane.value = globalStore.Global.functions.get('showDrawer')
+          openPane.value()
+        } else {
+          console.log(globalStore.Global.functions.get('showDrawer'))
+          openPane.value = globalStore.Global.functions.get('showDrawer')
+          openPane.value()
+        }
       })
     }
   })

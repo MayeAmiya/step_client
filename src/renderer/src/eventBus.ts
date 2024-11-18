@@ -12,10 +12,16 @@ export const useGlobalStore = defineStore('counter', {
     tagDataList.init()
     const keywordList = new Keyword()
 
+    const functions = new Map<string, (...args: unknown[]) => unknown>()
+    const currentCommpoent: string = ''
+    const selectedTagIndex = -1
     const Global = {
       tagDataList,
       tagInfoList,
-      keywordList
+      keywordList,
+      selectedTagIndex,
+      functions,
+      currentCommpoent
     }
     return { Global }
   },
@@ -25,6 +31,9 @@ export const useGlobalStore = defineStore('counter', {
     setCandidatesFromTagInfo() {
       const keywordsList = this.Global.tagInfoList.tags.map((tag) => ({ keywords: tag.keywords }))
       this.Global.keywordList.setCandidatesFromTagInfo(keywordsList)
+    },
+    setFunction<T extends (...args: unknown[]) => unknown>(name: string, fn: T) {
+      this.Global.functions.set(name, fn)
     }
   }
 })

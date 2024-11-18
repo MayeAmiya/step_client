@@ -1,15 +1,10 @@
 <template>
   <div>
-    <div v-for="(item, index) in stringList" :key="index">
-      <el-checkbox
-        v-model="selectedStrings"
-        :label="item"
-        size="large"
-        border
-        style="width: 100%"
-        >{{ item }}</el-checkbox
-      >
-    </div>
+    <el-checkbox-group v-model="selectedStrings">
+      <div v-for="(item, index) in stringList" :key="index">
+        <el-checkbox :value="item" size="large" border style="width: 100%">{{ item }}</el-checkbox>
+      </div>
+    </el-checkbox-group>
   </div>
 
   <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px">

@@ -1,7 +1,7 @@
 // 标签列表 标签序号 类型      组织序号   父级序号  信息列表 名称 日期     坐标
 //         绝不重复 公有/私有  0为大地图 0为大地图  TagInfo 名称 更新日期 经纬坐标/相对坐标
 class TagInfo {
-  tag: number
+  id: number
   type: string
   groupid: number
   father: number
@@ -12,7 +12,7 @@ class TagInfo {
   location: [number, number]
 
   constructor(
-    tag: number,
+    id: number,
     type: string,
     groupid: number,
     father: number,
@@ -22,7 +22,7 @@ class TagInfo {
     date: string,
     location: [number, number]
   ) {
-    this.tag = tag
+    this.id = id
     this.type = type
     this.groupid = groupid
     this.father = father
@@ -44,7 +44,7 @@ class TagInfoCollection {
     const data = JSON.parse(json)
     this.tags = data.map(
       (item: {
-        tag: number
+        id: number
         type: string
         groupid: number
         father: number
@@ -55,7 +55,7 @@ class TagInfoCollection {
         location: [number, number]
       }) =>
         new TagInfo(
-          item.tag,
+          item.id,
           item.type,
           item.groupid,
           item.father,
@@ -71,7 +71,7 @@ class TagInfoCollection {
   init() {
     this.fromJSON(`[
       {
-          "tag": 1,
+          "id": 1,
           "type": "Global",
           "groupid": -1,
           "father": 0,
@@ -82,7 +82,7 @@ class TagInfoCollection {
           "location": [113.536674,34.817112]
         },
         {
-          "tag": 2,
+          "id": 2,
           "type": "Global",
           "groupid": 1,
           "father": 0,
@@ -93,7 +93,7 @@ class TagInfoCollection {
           "location": [113.525143,34.809434]
         },
         {
-          "tag": 3,
+          "id": 3,
           "type": "Global",
           "groupid": 2,
           "father": 1,

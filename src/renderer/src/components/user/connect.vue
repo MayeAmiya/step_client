@@ -1,6 +1,6 @@
 <template>
   <div v-on-click-outside="back" class="connect">
-    <el-avatar size="large" src="../../assets/head.png" />
+    <el-avatar id="head" shape="square" :size="150" :src="head" />
     <h1>Name</h1>
     <h2>Email</h2>
     <button @click="connect">登录</button>
@@ -10,7 +10,8 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import { vOnClickOutside } from '@vueuse/components'
-
+import headImg from '../../assets/head.png'
+const head = headImg
 const router = useRouter()
 
 const connect = () => {
@@ -46,5 +47,7 @@ button {
   padding: 10px 80px;
   font-size: 16px;
   cursor: pointer;
+  display: inline-block; /* 横排文字 */
+  white-space: nowrap; /* 一行字 */
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div aria-label="A complete example of page header">
+  <div class="groupinfPage" aria-label="A complete example of page header">
     <el-page-header @back="onBack">
       <template #breadcrumb>
         <el-breadcrumb separator="/">
@@ -50,3 +50,9 @@ const onBack = () => {
   notify('Back')
 }
 </script>
+
+<style>
+.groupinfPage {
+  padding: 20px;
+}
+</style>
